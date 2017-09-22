@@ -134,7 +134,7 @@ while $page < $total_pages + 1 do
     $total_pages = $rules['meta']['pages_total']
     $rule_idx += 1
 
-    puts " Rule ... #{$page} of #{$total_pages} API Requests" if $rule_idx.to_i % 2 == 0
+    puts " Rule ... #{$page} of #{$total_pages} API Requests" if $rule_idx.to_i % 100 == 0
   end
 
   $page += 1
@@ -208,20 +208,20 @@ while $recommendation_page < $total_recommendation_pages + 1 do
     # Product A Recommendation
     $product_a = API.get("/api/v1/reports/#{report_id}/items/#{$ids[1]}")
     $product_a_frequency = $product_a['data']['transaction_count']
-    $product_a_cprob = $product_a_frequency.to_f / $frequency.to_f
+    $product_a_cprob = ($product_a_frequency.to_f / $product_a_frequency.to_f).round(4)
     result = sql.execute($names[1], $names[2], $strength, $recommendation_frequency, $product_a_cprob)
 
     #Product B Recommendation
     $product_b = API.get("/api/v1/reports/#{report_id}/items/#{$ids[2]}")
     $product_b_frequency = $product_b['data']['transaction_count']
-    $product_b_cprob = $product_b_frequency.to_f / $frequency.to_f
+    $product_b_cprob = ($product_b_frequency.to_f / $product_b_frequency.to_f).round(4)
     result = sql.execute($names[2], $names[1], $strength, $recommendation_frequency, $product_b_cprob)
 
     $total_recommendations = $recommendations['meta']['records_on_page']
     $total_recommendation_pages = $recommendations['meta']['pages_total']
     $recommendations_idx += 1
 
-    puts " Recommendation ... #{$recommendation_page} of #{$total_recommendation_pages} API Requests" if $recommendations_idx.to_i % 2 == 0
+    puts " Recommendation ... #{$recommendation_page} of #{$total_recommendation_pages} API Requests" if $recommendations_idx.to_i % 100 == 0
   end
 
   $recommendation_page += 1
