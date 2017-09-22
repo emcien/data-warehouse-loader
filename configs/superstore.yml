@@ -1,0 +1,40 @@
+---
+patterns_url: <YOUR EMCIEN URL>
+auth_token: <YOUR TOKEN>
+
+database:
+  host: db.hostname.com
+  name: emcien_data_warehouse_for_order_priority
+  user: emcien_db_user
+  password:
+  emcien_rules_table:
+    name: emcien_rules
+  emcien_analyses_table:
+    name: emcien_analyses
+  emcien_recommendations_table:
+    name: emcien_product_recommendations
+
+bandit_params:
+  params:
+    compression: gz
+    filename: superstore.csv
+    input_format: wide
+    outcome_category: Order Priority
+    output_format: wide
+
+report_params:
+  delimiter: comma
+  encoding: UTF-8
+  file_format: long
+  outcome: Order Priority
+  report:
+    original_file_name: superstore.csv
+    name: Super Store Rules
+
+affinity_params:
+  encoding: UTF-8
+  file_format: long
+  max_cluster_size: 2
+  report:
+    original_file_name: superstore.csv
+    name: Super Store Product Recommendations

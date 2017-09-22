@@ -1,0 +1,34 @@
+CREATE DATABASE emcien_data_warehouse_for_order_priority;
+
+CREATE TABLE emcien_analyses (
+  id int unsigned auto_increment PRIMARY KEY,
+  emcien_id integer,
+  name varchar(255),
+  created_at datetime,
+  state varchar(255)
+);
+
+CREATE TABLE emcien_rules (
+    id int unsigned auto_increment PRIMARY KEY,
+    name varchar(255),
+    size integer,
+    category varchar(255),
+    frequency integer,
+    lift float,
+    outcome varchar(255),
+    probability float,
+    emcien_id integer,
+
+    INDEX rule_name_cateogry (name, category)
+);
+
+CREATE TABLE emcien_product_recommendations (
+    id int unsigned auto_increment PRIMARY KEY,
+    product_name_a varchar(255),
+    product_name_b varchar(255),
+    product_recommendation_strength float,
+    product_recommendation_frequency integer,
+    product_recommendation_conditional_probability float,
+
+    INDEX recommendation_name_a (product_name_a)
+);
